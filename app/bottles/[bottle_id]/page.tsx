@@ -13,9 +13,9 @@ async function getBottleFromDB(id: string) {
 export default async function BottlePage({
   params,
 }: {
-  params: { bottle_id: string };
+  params: Promise<{ bottle_id: string }>;
 }) {
-  const { bottle_id } = await params;
+  const bottle_id = (await params).bottle_id;
 
   const bottle = await getBottleFromDB(bottle_id);
 
