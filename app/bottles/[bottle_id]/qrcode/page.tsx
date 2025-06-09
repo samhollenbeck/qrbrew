@@ -7,7 +7,7 @@ export default function QRPage() {
 	useEffect(() => {
 	  const generateAndDownloadQR = async () => {
 		const urlPrefix = 'https://brewery-app-phi.vercel.app/bottles/'
-		const dataUrl = await QRCode.toDataURL(urlPrefix, { margin: 1, scale: 10, errorCorrectionLevel: 'H' })
+		const dataUrl = await QRCode.toDataURL(urlPrefix, { margin: 1, scale: 10, errorCorrectionLevel: 'low' })
 
 		const link = document.createElement('a')
 		link.href = dataUrl
