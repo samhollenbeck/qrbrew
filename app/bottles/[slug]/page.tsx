@@ -8,6 +8,7 @@ export default async function BottlePage({
   params: Promise<{ slug: string }>;
 }) {
   const slug = (await params).slug;
+  console.log(slug)
 
   const bottle = {}
 
