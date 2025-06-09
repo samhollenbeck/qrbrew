@@ -10,9 +10,9 @@ export async function getBottles() {
 	return res.rows
 }
 
-export async function getBottle(id: number) {
-  const query = 'SELECT * FROM bottles WHERE id = $1'
-  const values = [id]
+export async function getBottle(slug: string) {
+  const query = 'SELECT * FROM bottles WHERE slug = $1'
+  const values = [slug]
   const res = await pool.query(query, values)
   return res.rows[0]
 }
