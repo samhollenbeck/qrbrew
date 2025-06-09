@@ -13,6 +13,6 @@ export async function getBottles() {
 export async function getBottle(id: number) {
   const query = 'SELECT * FROM bottles WHERE id = $1'
   const values = [id]
-	const res = await pool.query(query, values)
-	return res.rows[0]
+  const res = await pool.query(query, values)
+  return res.rows[0]
 }
