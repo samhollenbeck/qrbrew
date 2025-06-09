@@ -15,11 +15,11 @@ async function getBottleFromDB(id: string) {
 export default async function BottlePage({
   params,
 }: {
-  params: Promise<{ bottle_id: string }>;
+  params: Promise<{ slug: string }>;
 }) {
-  const bottle_id = (await params).bottle_id;
+  const slug = (await params).slug;
 
-  const bottle = await getBottleFromDB(bottle_id);
+  const bottle = await getBottleFromDB(slug);
 
   if (!bottle) return notFound();
 
