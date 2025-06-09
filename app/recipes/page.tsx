@@ -1,4 +1,5 @@
-export const dynamic = 'force-dynamic'
+// export const dynamic = 'force-dynamic'
+export const revalidate = 300
 
 import { getRecipes } from "@/lib/db/queries";
 
