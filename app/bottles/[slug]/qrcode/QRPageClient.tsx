@@ -1,32 +1,50 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import QRCode from 'qrcode'
 
 type QRPageProps = {
-	slug: string
-  }
+  slug: string
+}
 
 export default function QRPageClient({ slug }: QRPageProps) {
-	useEffect(() => {
-	  const generateAndDownloadQR = async () => {
-		const urlPrefix = 'https://brewery-app-phi.vercel.app/bottles/' + slug
-		const dataUrl = await QRCode.toDataURL(urlPrefix, { margin: 1, scale: 10, errorCorrectionLevel: 'low' })
+  const [downloaded, setDownloaded] = useState(false)
 
-		const link = document.createElement('a')
-		link.href = dataUrl
-		link.download = slug + '.png'
-		document.body.appendChild(link)
-		link.click()
-		document.body.removeChild(link)
-	  }
+  useEffect(() => {
+    const generateAndDownloadQR = async () => {
+      try {
+        const urlPrefix = 'https://brewery-app-phi.vercel.app/bottles/' + slug
+        const dataUrl = await QRCode.toDataURL(urlPrefix, {
+          margin: 1,
+          scale: 10,
+          errorCorrectionLevel: 'low',
+        })
 
-	  generateAndDownloadQR()
-	}, [])
+        const link = document.createElement('a')
+        link.href = dataUrl
+        link.download = slug + '.png'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
 
-	return (
-	  <div className="flex items-center justify-center h-screen">
-		<p>Generating your QR code and downloading...</p>
-	  </div>
-	)
-  }
+        setDownloaded(true)
+      } catch (error) {
+        console.error('Failed to generate or download QR code:', error)
+      }
+    }
+
+    generateAndDownloadQR()
+  }, [slug])
+
+  return (
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col gap-[32px] row-start-2 items-center">
+        <p className="text-sm/6 text-center font-[family-name:var(--font-geist-mono)]">
+          {downloaded
+            ? 'QR Code downloaded successfully.'
+            : 'Generating and downloading your QR Code...'}
+        </p>
+      </main>
+    </div>
+  )
+}
