@@ -1,11 +1,11 @@
 import { pool } from './db'
 
-export async function getRecipes() {
+export async function getAllRecipes() {
   const res = await pool.query('SELECT * FROM recipes')
   return res.rows
 }
 
-export async function getBottles() {
+export async function getAllBottles() {
   const query =
     `SELECT
       bottles.id AS bottle_id,
@@ -44,7 +44,7 @@ export async function getBottles() {
 	return res.rows
 }
 
-export async function getBottle(slug: string) {
+export async function getBottleFromSlug(slug: string) {
   const query =
     `SELECT
       bottles.id AS bottle_id,
@@ -83,4 +83,26 @@ export async function getBottle(slug: string) {
   const values = [slug]
   const res = await pool.query(query, values)
   return res.rows[0]
+}
+
+export async function getSugarAdditionsBySlug(slug: string) {
+  const query =
+    `SELECT
+      sugarAdditions.id AS sugar_addition_id,
+      sugarAdditions.amountInGrams,
+      sugarAdditions.createdOn AS sugar_addition_createdOn,
+
+      sugarTypes.id AS sugar_type_id,
+      sugarTypes.name AS sugar_type_name,
+      sugarTypes.isReal,
+      sugarTypes.createdOn AS sugar_type_createdOn
+
+      FROM sugarAdditions
+      JOIN bottles ON sugarAdditions.bottleId = bottles.id
+      JOIN sugarTypes ON sugarAdditions.sugarTypesId = sugarTypes.id
+
+      WHERE bottles.slug = $1;`
+  const values = [slug]
+  const res = await pool.query(query, values)
+  return res.rows
 }
