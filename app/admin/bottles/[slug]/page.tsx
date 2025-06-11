@@ -10,7 +10,7 @@ export default async function AdminBottlePage({
 }) {
   const slug = (await params).slug;
 
-  const bottle = {slug: slug}
+  const bottle = {slug: slug, sterilized: false, glassware_volume: 0, citricAcidInGrams: 0}
 
   if (!bottle) return notFound();
 
