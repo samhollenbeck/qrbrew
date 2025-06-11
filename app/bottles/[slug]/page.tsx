@@ -10,7 +10,7 @@ export default async function BottlePage({
 }) {
   const slug = (await params).slug;
 
-  const bottle = {}
+  const bottle = {slug: slug}
 
   if (!bottle) return notFound();
 
