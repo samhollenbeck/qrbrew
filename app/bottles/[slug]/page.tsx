@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic'
 
-import BottleDetails from '@/components/bottle/BottleDetails';
+import BottleDisplay from '@/components/bottle/bottle-display';
 import { notFound } from 'next/navigation';
 
 export default async function BottlePage({
@@ -14,5 +14,5 @@ export default async function BottlePage({
 
   if (!bottle) return notFound();
 
-  return <BottleDetails bottle={bottle}/>;
+  return <BottleDisplay bottle={bottle}/>;
 }
