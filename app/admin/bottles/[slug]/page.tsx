@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic'
 import BottleDetails from '@/components/bottle/BottleDetails';
 import { notFound } from 'next/navigation';
 
-export default async function BottlePage({
+export default async function AdminBottlePage({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -14,5 +14,5 @@ export default async function BottlePage({
 
   if (!bottle) return notFound();
 
-  return <BottleDetails bottle={bottle}/>;
+  return <BottleDetails bottle={bottle} isAdmin={true}/>;
 }
