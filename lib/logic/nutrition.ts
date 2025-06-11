@@ -47,3 +47,25 @@ export function calculateAcidity(
   if (concentration < 3) return 'bright'
   return 'bold'
 }
+
+export function calculateSweetness(
+  bottle: Bottle,
+  sugars: SugarAdditions
+): 'dry' | 'off-dry' | 'semi-sweet' | 'sweet' {
+  const totalPerceivedSweetness = sugars.reduce(
+    (sum, s) => sum + s.amountInGrams * s.sweetnessFactor,
+    0
+  )
+
+  const volumeLiters = bottle.glassware_volume / 1000
+
+  if (volumeLiters === 0) return 'dry' // avoid division by zero
+
+  const sweetnessPerLiter = totalPerceivedSweetness / volumeLiters
+
+  // You can tune these thresholds to match your palate or sensory testing
+  if (sweetnessPerLiter < 5) return 'dry'
+  if (sweetnessPerLiter < 15) return 'off-dry'
+  if (sweetnessPerLiter < 30) return 'semi-sweet'
+  return 'sweet'
+}
