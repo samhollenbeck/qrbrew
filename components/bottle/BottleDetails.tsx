@@ -1,5 +1,7 @@
+import { Bottle } from "@/types/Bottle"
+
 type BottleDetailsProps = {
-	bottle: any
+	bottle: Bottle
 	isAdmin?: boolean
 }
 
