@@ -1,4 +1,4 @@
-import { Bottle } from '@/types/Bottle'
+import { Bottle } from '@/types/bottle'
 
 type BottleDetailsProps = {
   bottle: Bottle

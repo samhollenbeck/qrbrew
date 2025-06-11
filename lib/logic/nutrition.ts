@@ -1,5 +1,5 @@
-import { Bottle } from '@/types/Bottle'
-import { SugarAdditions } from '@/types/SugarAdditions'
+import { Bottle } from '@/types/bottle'
+import { SugarAdditions } from '@/types/sugar-additions'
 
 export function calculateTotalRealSugar(sugars: SugarAdditions): number {
   const totalGrams = sugars
