@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Brewery App",
+  title: "QR Brew",
   description: "Scan your bottle.",
 };
 
