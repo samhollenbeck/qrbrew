@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default async function HomePage() {
@@ -7,14 +7,16 @@ export default async function HomePage() {
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 tracking-[-.01em]">
-          Scan your bottle and learn everything you&apos;d like to know.
+            Scan your bottle and learn everything you&apos;d like to know.
           </li>
           <li className="mb-2 tracking-[-.01em]">
-            See recipes <Link href="/recipes" className="underline">here</Link>.
+            See recipes{' '}
+            <Link href="/recipes" className="underline">
+              here
+            </Link>
+            .
           </li>
-          <li className="tracking-[-.01em]">
-            Enjoy responsibly and delightfully.
-          </li>
+          <li className="tracking-[-.01em]">Enjoy responsibly and delightfully.</li>
         </ol>
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
@@ -24,13 +26,7 @@ export default async function HomePage() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
+          <Image aria-hidden src="/file.svg" alt="File icon" width={16} height={16} />
           Learn about Next.js
         </a>
         <a
@@ -39,16 +35,10 @@ export default async function HomePage() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
+          <Image aria-hidden src="/window.svg" alt="Window icon" width={16} height={16} />
           Templates
         </a>
       </footer>
     </div>
-  );
+  )
 }

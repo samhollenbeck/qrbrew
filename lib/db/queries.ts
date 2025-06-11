@@ -6,8 +6,7 @@ export async function getAllRecipes() {
 }
 
 export async function getAllBottles() {
-  const query =
-    `SELECT
+  const query = `SELECT
       bottles.id AS bottle_id,
       bottles.slug,
       bottles.bottledOn,
@@ -42,13 +41,12 @@ export async function getAllBottles() {
     JOIN recipes ON batches.recipeId = recipes.id
     JOIN glasswareTypes ON bottles.glasswareTypeId = glasswareTypes.id
     ORDER BY bottles.id;`
-	const res = await pool.query(query)
-	return res.rows
+  const res = await pool.query(query)
+  return res.rows
 }
 
 export async function getBottleFromSlug(slug: string) {
-  const query =
-    `SELECT
+  const query = `SELECT
       bottles.id AS bottle_id,
       bottles.slug,
       bottles.bottledOn,
@@ -90,8 +88,7 @@ export async function getBottleFromSlug(slug: string) {
 }
 
 export async function getSugarAdditionsBySlug(slug: string) {
-  const query =
-    `SELECT
+  const query = `SELECT
       sugarAdditions.id AS sugar_addition_id,
       sugarAdditions.amountInGrams,
       sugarAdditions.createdOn AS sugar_addition_createdOn,

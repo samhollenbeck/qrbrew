@@ -1,4 +1,4 @@
 export type SugarAdditions = {
-	isReal: boolean
-	amountInGrams: number
+  isReal: boolean
+  amountInGrams: number
 }[]

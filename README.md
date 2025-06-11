@@ -13,12 +13,15 @@ Now you can run the development server:
 ```bash
 npm run dev
 ```
+
 Open [http://localhost:3000](http://localhost:3000) or other provided address with your browser to see the result.
 
 ## Commits
+
 All commits pushed to the `main` branch are automatically deployed to Vercel.
 
 Vercel will not deploy if there are warning or error logs. Lint before you commit:
+
 ```bash
 npm run lint
 ```
