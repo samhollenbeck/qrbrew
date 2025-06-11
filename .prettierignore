@@ -1,0 +1,19 @@
+# Build outputs
+.next
+out
+build
+
+# Node modules
+node_modules
+
+# System files
+.DS_Store
+
+# Test coverage
+coverage
+
+# Public/static assets
+public
+
+# Optional but safe
+.env*
