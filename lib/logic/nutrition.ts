@@ -1,23 +1,33 @@
-import { Bottle } from '@/types/bottle'
-import { SugarAdditions } from '@/types/sugar-additions'
+import { Additions as Additions } from '@/types/additions'
 
-export function calculateTotalRealSugar(sugars: SugarAdditions): number {
-  const totalGrams = sugars
-    .filter((sugar) => sugar.isReal)
-    .reduce((sum, sugar) => sum + sugar.amountInGrams, 0)
-
+export function calculateTotalRealSugar(additions: Additions): number {
+  const totalGrams = additions?.length
+    ? additions
+        .filter((addition) => addition.isReal)
+        .reduce((sum, addition) => sum + addition.amountInGrams, 0)
+    : 0
   return totalGrams
 }
 
-export function calculateCarbonation(
-  bottle: Bottle,
-  sugars: SugarAdditions
+export function calculateCitricAcid(additions: Additions): number {
+  const totalGrams = additions?.length
+    ? additions
+        .filter((addition) => addition.name === 'citric acid')
+        .reduce((sum, addition) => sum + addition.amountInGrams, 0)
+    : 0
+  return totalGrams
+}
+
+export function calculateCarbination(
+  volume: number,
+  isSterilized: boolean,
+  additions: Additions
 ): 'none' | 'low' | 'moderate' | 'heavy' {
-  if (bottle.sterilized) return 'none'
+  if (isSterilized) return 'none'
 
-  const totalGrams = calculateTotalRealSugar(sugars)
+  const totalGrams = calculateTotalRealSugar(additions)
 
-  const volumeLiters = bottle.glassware_volume / 1000
+  const volumeLiters = volume / 1000
 
   if (volumeLiters === 0) return 'none' // avoid division by zero
 
@@ -28,18 +38,19 @@ export function calculateCarbonation(
   return 'heavy'
 }
 
-export function calculateCarbs(bottle: Bottle, sugars: SugarAdditions): number {
-  if (!bottle.sterilized) return 0
+export function calculateCarbs(isSterilized: boolean, additions: Additions): number {
+  if (!isSterilized) return 0
 
-  const totalGrams = calculateTotalRealSugar(sugars)
+  const totalGrams = calculateTotalRealSugar(additions)
 
   return totalGrams
 }
 
 export function calculateAcidity(
-  bottle: Bottle
+  volume: number,
+  additions: Additions
 ): 'none' | 'light' | 'balanced' | 'bright' | 'bold' {
-  const concentration = bottle.citricAcidInGrams / (bottle.glassware_volume / 1000) // g/L
+  const concentration = calculateCitricAcid(additions) / (volume / 1000) // g/L
 
   if (concentration === 0) return 'none'
   if (concentration < 0.5) return 'light'
@@ -49,15 +60,21 @@ export function calculateAcidity(
 }
 
 export function calculateSweetness(
-  bottle: Bottle,
-  sugars: SugarAdditions
+  volume: number,
+  isSterilized: boolean,
+  additions: Additions
 ): 'dry' | 'off-dry' | 'semi-sweet' | 'sweet' | 'super-sweet' {
-  const totalPerceivedSweetness = sugars.reduce(
-    (sum, s) => sum + s.amountInGrams * s.sweetnessFactor,
-    0
-  )
+  const totalPerceivedSweetness = additions?.length
+    ? additions
+        .filter((addition) => {
+          const isSugar = addition.type === 'sugar'
+          const survivesFermentation = isSterilized || !addition.isReal
+          return isSugar && survivesFermentation
+        })
+        .reduce((sum, addition) => sum + addition.amountInGrams * addition.sweetnessFactor, 0)
+    : 0
 
-  const volumeLiters = bottle.glassware_volume / 1000
+  const volumeLiters = volume / 1000
 
   if (volumeLiters === 0) return 'dry' // avoid division by zero
 
