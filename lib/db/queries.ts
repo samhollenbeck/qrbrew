@@ -1,3 +1,4 @@
+import { toCamelCase } from '../helpers'
 import { pool } from './db'
 
 export async function getAllRecipes() {
@@ -7,39 +8,31 @@ export async function getAllRecipes() {
 
 export async function getAllBottles() {
   const query = `SELECT
-      bottles.id AS bottle_id,
+      bottles.id,
       bottles.slug,
-      bottles.bottledOn,
-      bottles.sterilized,
-      bottles.citricAcidInGrams,
-      bottles.createdOn AS bottle_createdOn,
+      bottles.bottled_on,
+      bottles.is_sterilized,
 
-      batches.id AS batch_id,
       batches.name AS batch_name,
-      batches.descriptionFun,
-      batches.gravityFinal,
-      batches.startFermentOn,
-      batches.secondFermentOn,
-      batches.createdOn AS batch_createdOn,
+      batches.description_fun,
+      batches.gravity_final,
+      batches.start_ferment_on,
+      batches.second_ferment_on,
 
-      recipes.id AS recipe_id,
       recipes.name AS recipe_name,
-      recipes.description AS recipe_description,
-      recipes.expectedABV,
-      recipes.gravityOriginal,
-      recipes.urlPhoto AS recipe_photo,
-      recipes.createdOn AS recipe_createdOn,
+      recipes.description,
+      recipes.expected_abv,
+      recipes.gravity_original,
+      recipes.url_photo AS recipe_photo,
 
       -- Glassware
-      glasswareTypes.id AS glassware_id,
-      glasswareTypes.volume AS glassware_volume,
-      glasswareTypes.urlPhoto AS glassware_photo,
-      glasswareTypes.createdOn AS glassware_createdOn
+      glassware_types.volume,
+      glassware_types.url_photo AS glassware_photo
 
     FROM bottles
-    JOIN batches ON bottles.batchId = batches.id
-    JOIN recipes ON batches.recipeId = recipes.id
-    JOIN glasswareTypes ON bottles.glasswareTypeId = glasswareTypes.id
+    JOIN batches ON bottles.batch_id = batches.id
+    JOIN recipes ON batches.recipe_id = recipes.id
+    JOIN glassware_types ON bottles.glassware_type_id = glassware_types.id
     ORDER BY bottles.id;`
   const res = await pool.query(query)
   return res.rows
@@ -47,62 +40,53 @@ export async function getAllBottles() {
 
 export async function getBottleFromSlug(slug: string) {
   const query = `SELECT
-      bottles.id AS bottle_id,
+      bottles.id,
       bottles.slug,
-      bottles.bottledOn,
-      bottles.isSterilized,
-      bottles.createdOn AS bottle_createdOn,
+      bottles.bottled_on,
+      bottles.is_sterilized,
 
-      batches.id AS batch_id,
       batches.name AS batch_name,
-      batches.descriptionFun,
-      batches.gravityFinal,
-      batches.startFermentOn,
-      batches.secondFermentOn,
-      batches.createdOn AS batch_createdOn,
+      batches.description_fun,
+      batches.gravity_final,
+      batches.start_ferment_on,
+      batches.second_ferment_on,
 
-      recipes.id AS recipe_id,
       recipes.name AS recipe_name,
-      recipes.description AS recipe_description,
-      recipes.expectedABV,
-      recipes.gravityOriginal,
-      recipes.urlPhoto AS recipe_photo,
-      recipes.createdOn AS recipe_createdOn,
+      recipes.description,
+      recipes.expected_abv,
+      recipes.gravity_original,
+      recipes.url_photo AS recipe_photo,
 
       -- Glassware
-      glasswareTypes.id AS glassware_id,
-      glasswareTypes.volume AS glassware_volume,
-      glasswareTypes.urlPhoto AS glassware_photo,
-      glasswareTypes.createdOn AS glassware_createdOn
+      glassware_types.volume_in_ml,
+      glassware_types.url_photo AS glassware_photo
 
     FROM bottles
-    JOIN batches ON bottles.batchId = batches.id
-    JOIN recipes ON batches.recipeId = recipes.id
-    JOIN glasswareTypes ON bottles.glasswareTypeId = glasswareTypes.id
+    JOIN batches ON bottles.batch_id = batches.id
+    JOIN recipes ON batches.recipe_id = recipes.id
+    JOIN glassware_types ON bottles.glassware_type_id = glassware_types.id
 
     WHERE bottles.slug = $1;`
   const values = [slug]
   const res = await pool.query(query, values)
-  return res.rows[0]
+  return toCamelCase(res.rows[0])
 }
 
-export async function getSugarAdditionsBySlug(slug: string) {
+export async function getAdditionsBySlug(slug: string) {
   const query = `SELECT
-      sugarAdditions.id AS sugar_addition_id,
-      sugarAdditions.amountInGrams,
-      sugarAdditions.createdOn AS sugar_addition_createdOn,
-
-      sugarTypes.id AS sugar_type_id,
-      sugarTypes.name AS sugar_type_name,
-      sugarTypes.isReal,
-      sugarTypes.createdOn AS sugar_type_createdOn
-
-      FROM sugarAdditions
-      JOIN bottles ON sugarAdditions.bottleId = bottles.id
-      JOIN sugarTypes ON sugarAdditions.sugarTypesId = sugarTypes.id
-
-      WHERE bottles.slug = $1;`
+      additions.id,
+      additions.amount_in_grams,
+      addition_types.name,
+      addition_types.type,
+      sugar_addition_types.is_real,
+      sugar_addition_types.sweetness_factor
+    FROM additions
+    JOIN bottles ON additions.bottle_id = bottles.id
+    JOIN addition_types ON additions.addition_types_id = addition_types.id
+    LEFT JOIN sugar_addition_types
+      ON sugar_addition_types.addition_types_id = addition_types.id
+    WHERE bottles.slug = $1;`
   const values = [slug]
   const res = await pool.query(query, values)
-  return res.rows
+  return res.rows.map(toCamelCase)
 }
