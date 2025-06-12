@@ -1,0 +1,52 @@
+bottles:
+    id
+    batchId
+    glasswareTypeId
+    bottledOn
+    createdOn
+batches:
+    id
+    recipeId
+    name
+    descriptionFun
+    gravityFinal
+    startFermentOn
+    secondFermentOn
+    createdOn
+recipes:
+    id
+    name
+    description
+    expectedABV
+    gravityOriginal
+    urlPhoto
+    createdOn
+sugarAdditions:
+    id
+    bottleId
+    sugarTypesId
+    amountInGrams
+    createdOn
+sugarTypes:
+    id
+    name
+    isReal
+    createdOn
+glasswareTypes:
+    id
+    volume
+    urlPhoto
+    createdOn
+flavors:
+    id
+    name
+    createdOn
+alcoholTypes:
+    id
+    name
+    createdOn
+flavorsToRecipes:
+    id
+    flavorId
+    recipeId
+    createdOn
