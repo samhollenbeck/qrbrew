@@ -51,7 +51,7 @@ export function calculateAcidity(
 export function calculateSweetness(
   bottle: Bottle,
   sugars: SugarAdditions
-): 'dry' | 'off-dry' | 'semi-sweet' | 'sweet' {
+): 'dry' | 'off-dry' | 'semi-sweet' | 'sweet' | 'super-sweet' {
   const totalPerceivedSweetness = sugars.reduce(
     (sum, s) => sum + s.amountInGrams * s.sweetnessFactor,
     0
@@ -67,5 +67,6 @@ export function calculateSweetness(
   if (sweetnessPerLiter < 5) return 'dry'
   if (sweetnessPerLiter < 15) return 'off-dry'
   if (sweetnessPerLiter < 30) return 'semi-sweet'
-  return 'sweet'
+  if (sweetnessPerLiter < 45) return 'sweet'
+  return 'super-sweet'
 }
