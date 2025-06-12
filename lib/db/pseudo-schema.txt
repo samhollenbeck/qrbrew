@@ -2,6 +2,8 @@ bottles:
     id
     batchId
     glasswareTypeId
+    slug
+    isSterilized
     bottledOn
     createdOn
 batches:
@@ -21,15 +23,21 @@ recipes:
     gravityOriginal
     urlPhoto
     createdOn
-sugarAdditions:
+additions:
     id
     bottleId
-    sugarTypesId
+    additionTypesId
     amountInGrams
     createdOn
-sugarTypes:
+additionTypes:
     id
     name
+    type
+    createdOn
+sugarAdditionTypes:
+    id
+    additionTypesId
+    sweetnessFactor
     isReal
     createdOn
 glasswareTypes:
@@ -49,4 +57,9 @@ flavorsToRecipes:
     id
     flavorId
     recipeId
+    createdOn
+users:
+    id
+    username
+    passwordHashed
     createdOn
