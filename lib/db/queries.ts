@@ -50,8 +50,7 @@ export async function getBottleFromSlug(slug: string) {
       bottles.id AS bottle_id,
       bottles.slug,
       bottles.bottledOn,
-      bottles.sterilized,
-      bottles.citricAcidInGrams,
+      bottles.isSterilized,
       bottles.createdOn AS bottle_createdOn,
 
       batches.id AS batch_id,
