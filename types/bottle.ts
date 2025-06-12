@@ -1,9 +1,25 @@
+import { Additions } from './additions'
+
 export type Bottle = {
+  id: number
   slug: string
-  batch_name: string
-  recipe_name: string
-  descriptionfun: string
-  sterilized: boolean
-  glassware_volume: number
-  citricAcidInGrams: number
+  bottledOn: Date
+  isSterilized: boolean
+  batchName: string
+  descriptionFun: string
+  gravityFinal: number
+  startFermentOn: Date
+  secondFermentOn?: Date
+  recipeName: string
+  description: string
+  expectedAbv: number
+  gravityOriginal: number
+  recipePhoto?: string
+  volumeInMl: number
+  glasswarePhoto?: string
+  carbination: string
+  carbs: number
+  acidity: string
+  sweetness: string
+  additions: Additions
 }
