@@ -13,7 +13,7 @@ export default function QRPageClient({ slug }: QRPageProps) {
   useEffect(() => {
     const generateAndDownloadQR = async () => {
       try {
-        const urlPrefix = 'https://brewery-app-phi.vercel.app/bottles/' + slug
+        const urlPrefix = 'https://qrbrew.com/bottles/' + slug
         const dataUrl = await QRCode.toDataURL(urlPrefix, {
           margin: 1,
           scale: 10,
