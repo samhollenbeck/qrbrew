@@ -4,6 +4,7 @@ export type Bottle = {
   id: number
   slug: string
   bottledOn: Date
+  note?: string
   isSterilized: boolean
   batchName: string
   descriptionFun: string

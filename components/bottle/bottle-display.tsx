@@ -24,15 +24,16 @@ export default function BottleDisplay({ bottle, isAdmin = false }: BottleDetails
         </p>
         <p className="text-sm/6 text-center font-[family-name:var(--font-geist-mono)]">
           {bottle.descriptionFun} {bottle.description}
+          <br></br>
+          {bottle.note}
         </p>
-
         <div className="text-sm/6 text-center font-[family-name:var(--font-geist-mono)] flex flex-col gap-2 mt-4">
           <p>
             <strong>ABV:</strong> {bottle.expectedAbv}%
           </p>
-          <p>
+          {/* <p>
             <strong>Gravity:</strong> OG {bottle.gravityOriginal} → FG {bottle.gravityFinal}
-          </p>
+          </p> */}
           <p>
             <strong>Bottled:</strong> {new Date(bottle.bottledOn).toLocaleDateString()}
           </p>
@@ -55,17 +56,18 @@ export default function BottleDisplay({ bottle, isAdmin = false }: BottleDetails
             <strong>Carbs:</strong> {bottle.carbs} g
           </p>
         </div>
-
-        <div className="text-sm/6 text-center font-[family-name:var(--font-geist-mono)] flex flex-col gap-1 mt-6">
-          <p className="font-semibold">Additions:</p>
-          {bottle.additions.map((a) => (
-            <p key={a.id}>
-              {a.amountInGrams}g {a.name}
-              {a.type === 'sugar' &&
-                ` (${a.isReal ? 'real' : 'artificial'}, ×${a.sweetnessFactor} sweetness)`}
-            </p>
-          ))}
-        </div>
+        {bottle.additions.length > 0 && (
+          <div className="text-sm/6 text-center font-[family-name:var(--font-geist-mono)] flex flex-col gap-1 mt-6">
+            <p className="font-semibold">Additions:</p>
+            {bottle.additions.map((a) => (
+              <p key={a.id}>
+                {a.amountInGrams}g {a.name}
+                {a.type === 'sugar' &&
+                  ` (${a.isReal ? 'real' : 'artificial'}, ×${a.sweetnessFactor} sweetness)`}
+              </p>
+            ))}
+          </div>
+        )}
       </main>
     </div>
   )
