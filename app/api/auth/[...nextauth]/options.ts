@@ -25,7 +25,7 @@ export const options: NextAuthOptions = {
         ])
         const user = res.rows[0]
 
-        if (user && (await bcrypt.compare(credentials.password, user.passwordhashed))) {
+        if (user && (await bcrypt.compare(credentials.password, user.password_hashed))) {
           // Remove password before returning user object
 
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
