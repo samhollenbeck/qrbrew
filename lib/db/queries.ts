@@ -3,7 +3,7 @@ import { pool } from './db'
 
 export async function getAllRecipes() {
   const res = await pool.query('SELECT * FROM recipes')
-  return res.rows
+  return res.rows.map(toCamelCase)
 }
 
 export async function getAllBottles() {
@@ -35,7 +35,7 @@ export async function getAllBottles() {
     JOIN glassware_types ON bottles.glassware_type_id = glassware_types.id
     ORDER BY bottles.id;`
   const res = await pool.query(query)
-  return res.rows
+  return res.rows.map(toCamelCase)
 }
 
 export async function getBottleFromSlug(slug: string) {

@@ -9,8 +9,11 @@ import {
 } from './logic/nutrition'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function toCamelCase(row: Record<string, any>): any {
-  return Object.fromEntries(Object.entries(row).map(([key, value]) => [camelCase(key), value]))
+export function toCamelCase(row: Record<string, any> | null | undefined): any {
+  if (!row || typeof row !== 'object') return row; // Return as-is if null/undefined/not an object
+  return Object.fromEntries(
+    Object.entries(row).map(([key, value]) => [camelCase(key), value])
+  );
 }
 
 export async function getBottleCompleteData(slug: string): Promise<Bottle | null> {
