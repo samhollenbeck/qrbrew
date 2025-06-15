@@ -15,7 +15,7 @@ export default function QRPageClient({ slug }: QRPageProps) {
       try {
         const urlPrefix = 'https://qrbrew.com/bottles/' + slug
         const dataUrl = await QRCode.toDataURL(urlPrefix, {
-          margin: 1,
+          margin: 12,
           scale: 10,
           errorCorrectionLevel: 'low',
         })
