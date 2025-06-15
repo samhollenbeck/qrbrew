@@ -38,7 +38,7 @@ export default function BottleDisplay({ bottle, isAdmin = false }: BottleDetails
             <strong>Bottled:</strong> {new Date(bottle.bottledOn).toLocaleDateString()}
           </p>
           <p>
-            <strong>Volume:</strong> {bottle.volumeInMl} mL
+            <strong>Volume:</strong> {Math.trunc(bottle.volumeInMl)} mL
           </p>
           <p>
             <strong>Sterilized:</strong> {bottle.isSterilized ? 'Yes' : 'No'}
