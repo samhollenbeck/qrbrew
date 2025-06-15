@@ -49,13 +49,14 @@ export function calculateCarbs(isSterilized: boolean, additions: Additions): num
 export function calculateAcidity(
   volume: number,
   additions: Additions
-): 'none' | 'light' | 'balanced' | 'bright' | 'bold' {
+): 'none' | 'light' | 'balanced' | 'crisp' | 'bright' | 'bold' {
   const concentration = calculateCitricAcid(additions) / (volume / 1000) // g/L
 
   if (concentration === 0) return 'none'
   if (concentration < 0.5) return 'light'
-  if (concentration < 1.5) return 'balanced'
-  if (concentration < 3) return 'bright'
+  if (concentration < 1.25) return 'balanced'
+  if (concentration < 2.0) return 'crisp'
+  if (concentration < 3.0) return 'bright'
   return 'bold'
 }
 
@@ -81,9 +82,9 @@ export function calculateSweetness(
   const sweetnessPerLiter = totalPerceivedSweetness / volumeLiters
 
   // You can tune these thresholds to match your palate or sensory testing
-  if (sweetnessPerLiter < 5) return 'dry'
-  if (sweetnessPerLiter < 15) return 'off-dry'
-  if (sweetnessPerLiter < 30) return 'semi-sweet'
-  if (sweetnessPerLiter < 45) return 'sweet'
+  if (sweetnessPerLiter < 10) return 'dry'
+  if (sweetnessPerLiter < 25) return 'off-dry'
+  if (sweetnessPerLiter < 45) return 'semi-sweet'
+  if (sweetnessPerLiter < 60) return 'sweet'
   return 'super-sweet'
 }
