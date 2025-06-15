@@ -53,10 +53,10 @@ export function calculateAcidity(
   const concentration = calculateCitricAcid(additions) / (volume / 1000) // g/L
 
   if (concentration === 0) return 'none'
-  if (concentration < 0.5) return 'light'
-  if (concentration < 1.25) return 'balanced'
-  if (concentration < 2.0) return 'crisp'
-  if (concentration < 3.0) return 'bright'
+  if (concentration < 1) return 'light'
+  if (concentration < 1.5) return 'balanced'
+  if (concentration < 2.25) return 'crisp'
+  if (concentration < 3.5) return 'bright'
   return 'bold'
 }
 
@@ -84,7 +84,7 @@ export function calculateSweetness(
   // You can tune these thresholds to match your palate or sensory testing
   if (sweetnessPerLiter < 10) return 'dry'
   if (sweetnessPerLiter < 25) return 'off-dry'
-  if (sweetnessPerLiter < 45) return 'semi-sweet'
-  if (sweetnessPerLiter < 60) return 'sweet'
+  if (sweetnessPerLiter < 55) return 'semi-sweet'
+  if (sweetnessPerLiter < 70) return 'sweet'
   return 'super-sweet'
 }
