@@ -25,7 +25,7 @@ export default function BottleDisplay({ bottle, isAdmin = false }: BottleDetails
         <p className="text-sm/6 text-center font-[family-name:var(--font-geist-mono)]">
           {bottle.descriptionFun} {bottle.description}
           <br></br>
-          {bottle.note}
+          {bottle.message}
         </p>
         <div className="text-sm/6 text-center font-[family-name:var(--font-geist-mono)] flex flex-col gap-2 mt-4">
           <p>
