@@ -5,7 +5,7 @@ export type Bottle = {
   slug: string
   bottledOn: Date
   message?: string
-  isSterilized: boolean
+  isPasteurized: boolean
   batchName: string
   descriptionFun: string
   gravityFinal: number
@@ -23,4 +23,5 @@ export type Bottle = {
   acidity: string
   sweetness: string
   additions: Additions
+  standardDrinks: number
 }

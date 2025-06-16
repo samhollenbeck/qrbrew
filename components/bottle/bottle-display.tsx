@@ -31,6 +31,9 @@ export default function BottleDisplay({ bottle, isAdmin = false }: BottleDetails
           <p>
             <strong>ABV:</strong> {bottle.expectedAbv}%
           </p>
+          <p>
+            <strong>Standard Drinks:</strong> {bottle.standardDrinks} drinks
+          </p>
           {/* <p>
             <strong>Gravity:</strong> OG {bottle.gravityOriginal} → FG {bottle.gravityFinal}
           </p> */}
@@ -41,7 +44,7 @@ export default function BottleDisplay({ bottle, isAdmin = false }: BottleDetails
             <strong>Volume:</strong> {Math.trunc(bottle.volumeInMl)} mL
           </p>
           <p>
-            <strong>Sterilized:</strong> {bottle.isSterilized ? 'Yes' : 'No'}
+            <strong>Pasteurized:</strong> {bottle.isPasteurized ? 'Yes' : 'No'}
           </p>
           <p>
             <strong>Sweetness:</strong> {bottle.sweetness}

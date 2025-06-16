@@ -20,10 +20,10 @@ export function calculateCitricAcid(additions: Additions): number {
 
 export function calculateCarbination(
   volume: number,
-  isSterilized: boolean,
+  isPasteurized: boolean,
   additions: Additions
 ): 'none' | 'low' | 'moderate' | 'heavy' {
-  if (isSterilized) return 'none'
+  if (isPasteurized) return 'none'
 
   const totalGrams = calculateTotalRealSugar(additions)
 
@@ -38,8 +38,8 @@ export function calculateCarbination(
   return 'heavy'
 }
 
-export function calculateCarbs(isSterilized: boolean, additions: Additions): number {
-  if (!isSterilized) return 0
+export function calculateCarbs(isPasteurized: boolean, additions: Additions): number {
+  if (!isPasteurized) return 0
 
   const totalGrams = calculateTotalRealSugar(additions)
 
@@ -62,14 +62,14 @@ export function calculateAcidity(
 
 export function calculateSweetness(
   volume: number,
-  isSterilized: boolean,
+  isPasteurized: boolean,
   additions: Additions
 ): 'dry' | 'off-dry' | 'semi-sweet' | 'sweet' | 'super-sweet' {
   const totalPerceivedSweetness = additions?.length
     ? additions
         .filter((addition) => {
           const isSugar = addition.type === 'sugar'
-          const survivesFermentation = isSterilized || !addition.isReal
+          const survivesFermentation = isPasteurized || !addition.isReal
           return isSugar && survivesFermentation
         })
         .reduce((sum, addition) => sum + addition.amountInGrams * addition.sweetnessFactor, 0)
@@ -87,4 +87,8 @@ export function calculateSweetness(
   if (sweetnessPerLiter < 55) return 'semi-sweet'
   if (sweetnessPerLiter < 70) return 'sweet'
   return 'super-sweet'
+}
+
+export function calculateStandardDrinks(volumeInMl: number, expectedAbv: number): number {
+  return (volumeInMl * expectedAbv) / 1000
 }

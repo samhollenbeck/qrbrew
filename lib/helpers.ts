@@ -6,6 +6,7 @@ import {
   calculateCarbination,
   calculateCarbs,
   calculateSweetness,
+  calculateStandardDrinks,
 } from './logic/nutrition'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -19,12 +20,12 @@ export async function getBottleCompleteData(slug: string): Promise<Bottle | null
   if (!bottle) return null
 
   const additions = await getAdditionsBySlug(slug)
-  bottle.carbination = calculateCarbination(bottle.volumeInMl, bottle.isSterilized, additions)
-  bottle.carbs = calculateCarbs(bottle.isSterilized, additions)
+  bottle.carbination = calculateCarbination(bottle.volumeInMl, bottle.isPasteurized, additions)
+  bottle.carbs = calculateCarbs(bottle.isPasteurized, additions)
   bottle.acidity = calculateAcidity(bottle.volumeInMl, additions)
-  bottle.sweetness = calculateSweetness(bottle.volumeInMl, bottle.isSterilized, additions)
-
+  bottle.sweetness = calculateSweetness(bottle.volumeInMl, bottle.isPasteurized, additions)
   bottle.additions = additions
+  bottle.standardDrinks = calculateStandardDrinks(bottle.volumeInMl, bottle.expectedAbv)
 
   return bottle
 }
