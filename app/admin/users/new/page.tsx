@@ -23,7 +23,9 @@ export default function NewUserPage() {
       <h1 className="text-xl font-bold mb-4">New User</h1>
       <form onSubmit={handleSubmit} className="space-y-4 max-w-sm">
         <div>
-          <label className="block mb-1 font-medium" htmlFor="username">Username</label>
+          <label className="block mb-1 font-medium" htmlFor="username">
+            Username
+          </label>
           <input
             id="username"
             type="text"
@@ -34,7 +36,9 @@ export default function NewUserPage() {
           />
         </div>
         <div>
-          <label className="block mb-1 font-medium" htmlFor="password">Password</label>
+          <label className="block mb-1 font-medium" htmlFor="password">
+            Password
+          </label>
           <input
             id="password"
             type="password"
