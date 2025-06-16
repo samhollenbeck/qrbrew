@@ -27,7 +27,7 @@ export async function getAllBottles() {
       recipes.url_photo AS recipe_photo,
 
       -- Glassware
-      glassware_types.volume,
+      glassware_types.volume_in_ml,
       glassware_types.url_photo AS glassware_photo
 
     FROM bottles
