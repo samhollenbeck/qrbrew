@@ -1,4 +1,6 @@
-import { pool } from './db'
+'use server'
+
+import { pool } from '../db'
 import bcrypt from 'bcrypt'
 
 export async function registerUser(username: string, rawPassword: string) {
