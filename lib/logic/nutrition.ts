@@ -53,10 +53,10 @@ export function calculateAcidity(
   const concentration = calculateCitricAcid(additions) / (volume / 1000) // g/L
 
   if (concentration === 0) return 'none'
-  if (concentration < 1) return 'light'
-  if (concentration < 1.5) return 'balanced'
-  if (concentration < 2.25) return 'crisp'
-  if (concentration < 3.5) return 'bright'
+  if (concentration < 1.25) return 'light'
+  if (concentration < 2.5) return 'balanced'
+  if (concentration < 3.75) return 'crisp'
+  if (concentration < 5) return 'bright'
   return 'bold'
 }
 
@@ -90,5 +90,5 @@ export function calculateSweetness(
 }
 
 export function calculateStandardDrinks(volumeInMl: number, expectedAbv: number): number {
-  return (volumeInMl * expectedAbv) / 1000
+  return (volumeInMl * (expectedAbv / 100)) / 17.7
 }

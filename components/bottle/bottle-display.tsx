@@ -32,7 +32,7 @@ export default function BottleDisplay({ bottle, isAdmin = false }: BottleDetails
             <strong>ABV:</strong> {bottle.expectedAbv}%
           </p>
           <p>
-            <strong>Standard Drinks:</strong> {bottle.standardDrinks} drinks
+            <strong>Standard Drinks:</strong> {bottle.standardDrinks.toFixed(1)} drinks
           </p>
           {/* <p>
             <strong>Gravity:</strong> OG {bottle.gravityOriginal} → FG {bottle.gravityFinal}
