@@ -19,6 +19,7 @@ export default async function BottlesPage() {
               <th className="px-4 py-2">ABV</th>
               <th className="px-4 py-2">Volume</th>
               <th className="px-4 py-2">Bottled On</th>
+              <th className="px-4 py-2">QRCode</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -37,6 +38,15 @@ export default async function BottlesPage() {
                     month: 'short',
                     day: 'numeric',
                   })}
+                </td>
+                <td className="px-4 py-2 text-blue-600 hover:underline text-left">
+                  <a
+                    href={`/admin/bottles/${b.slug}/qrcode`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Download
+                  </a>
                 </td>
               </tr>
             ))}
