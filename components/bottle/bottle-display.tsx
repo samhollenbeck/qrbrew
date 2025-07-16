@@ -20,7 +20,7 @@ export default function BottleDisplay({ bottle, isAdmin = false }: BottleDetails
       ) : null}
       <main className="flex flex-col gap-[32px] row-start-2 items-center">
         <p className="text-sm/6 text-center font-[family-name:var(--font-geist-mono)] font-bold">
-          {bottle.batchName} {bottle.recipeName}
+          {bottle.nameFirst} {bottle.nameLast}
         </p>
         <p className="text-sm/6 text-center font-[family-name:var(--font-geist-mono)]">
           {bottle.descriptionFun} {bottle.description}

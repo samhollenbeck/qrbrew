@@ -6,12 +6,12 @@ export type Bottle = {
   bottledOn: Date
   message?: string
   isPasteurized: boolean
-  batchName: string
+  nameFirst: string
   descriptionFun: string
   gravityFinal: number
   startFermentOn: Date
   secondFermentOn?: Date
-  recipeName: string
+  nameLast?: string
   description: string
   expectedAbv: number
   gravityOriginal: number

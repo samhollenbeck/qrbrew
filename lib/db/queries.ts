@@ -14,13 +14,13 @@ export async function getAllBottles() {
       bottles.is_pasteurized,
       bottles.message,
 
-      batches.name AS batch_name,
       batches.description_fun,
       batches.gravity_final,
       batches.start_ferment_on,
       batches.second_ferment_on,
 
-      recipes.name AS recipe_name,
+      recipes.name_first AS name_first,
+      recipes.name_last AS name_last,
       recipes.description,
       recipes.expected_abv,
       recipes.gravity_original,
@@ -47,13 +47,13 @@ export async function getBottleFromSlug(slug: string) {
       bottles.is_pasteurized,
       bottles.message,
 
-      batches.name AS batch_name,
       batches.description_fun,
       batches.gravity_final,
       batches.start_ferment_on,
       batches.second_ferment_on,
 
-      recipes.name AS recipe_name,
+      recipes.name_first AS name_first,
+      recipes.name_last AS name_last,
       recipes.description,
       recipes.expected_abv,
       recipes.gravity_original,

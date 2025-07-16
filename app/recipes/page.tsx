@@ -12,7 +12,7 @@ export default async function RecipesPage() {
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           {recipes.map((r) => (
             <li key={r.id} className="tracking-[-.01em]">
-              {r.name} - {r.expectedAbv}% ABV
+              {r.nameFirst} {r.nameLast} - {r.expectedAbv}% ABV
             </li>
           ))}
         </ol>

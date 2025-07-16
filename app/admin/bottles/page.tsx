@@ -14,8 +14,8 @@ export default async function BottlesPage() {
           <thead className="border-b border-gray-300 text-xs uppercase tracking-widest text-gray-500">
             <tr>
               <th className="px-4 py-2">Slug</th>
-              <th className="px-4 py-2">Batch</th>
-              <th className="px-4 py-2">Recipe</th>
+              <th className="px-4 py-2">First Name</th>
+              <th className="px-4 py-2">Last Name</th>
               <th className="px-4 py-2">ABV</th>
               <th className="px-4 py-2">Volume</th>
               <th className="px-4 py-2">Bottled On</th>
@@ -28,8 +28,8 @@ export default async function BottlesPage() {
                 <td className="px-4 py-2 text-blue-600 hover:underline text-left">
                   <Link href={`/admin/bottles/${b.slug}`}>#{b.slug}</Link>
                 </td>
-                <td className="px-4 py-2">{b.batchName}</td>
-                <td className="px-4 py-2">{b.recipeName}</td>
+                <td className="px-4 py-2">{b.nameFirst}</td>
+                <td className="px-4 py-2">{b.nameLast}</td>
                 <td className="px-4 py-2">{b.expectedAbv}%</td>
                 <td className="px-4 py-2">{Math.trunc(b.volumeInMl)} mL</td>
                 <td className="px-4 py-2">
